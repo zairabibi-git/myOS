@@ -11,12 +11,12 @@ struct Char {
 struct Char* buffer = (struct Char*) 0xb8000;
 size_t col = 0;
 size_t row = 0;
-uint8_t color = PRINT_COLOR_RED | PRINT_COLOR_WHITE << 4;
+uint8_t color = PRINT_COLOR_WHITE | PRINT_COLOR_BLACK << 4;
 
 void clear_row(size_t row) {
     struct Char empty = (struct Char) {
-        character: ' ',
-        color: color,
+        character : ' ',
+        color : color,
     };
 
     for (size_t col = 0; col < NUM_COLS; col++) {
@@ -80,4 +80,73 @@ void print_str(char* str) {
 
 void print_set_color(uint8_t foreground, uint8_t background) {
     color = foreground + (background << 4);
+}
+
+//function to print NUST using astericks
+void printNUST()
+{
+    size_t height=5;
+    
+    //for "N"
+    for(size_t i=0; i<height; i++)
+    {
+        print_str("*");
+        for(size_t j=0; j<i; j++)
+        {
+            if(j==i-2 || j==i-3 || j==i-4)
+                print_str(" ");
+                
+            else
+                print_str(" *");
+        }
+        
+        for(size_t k=0; k<2; k++)
+        {
+            print_str("*");
+        }
+        
+        for(size_t k=i; k<3 || k<4; k++)
+        {
+            if(k==0)
+                print_str(" ");
+            print_str(" ");
+        }
+        print_str("*");
+        print_str("\n");
+    }
+    print_str("\n");
+    
+    //for U
+    for(size_t i=0; i<height-1; i++)
+    {
+        print_str("*       *");
+        print_str("\n");
+    }
+    print_str(" ");
+    
+    for(size_t k=0; k<7; k++)
+        print_str("*");
+    print_str("\n\n");
+    
+    //for S
+    print_str("   ");
+    for(size_t k=0; k<7; k++)
+            print_str("*");
+    print_str("\n *\n*\n *\n   ");
+    for(size_t k=0; k<7; k++)
+            print_str("*");
+   print_str("\n           *\n          *\n   ");
+    for(size_t k=0; k<7; k++)
+            print_str("*");
+    
+   print_str("\n\n");
+    //for T
+    for(size_t k=0; k<9; k++)
+        print_str("*");
+    print_str("\n");
+    for(size_t i=0; i<height; i++)
+    {
+        print_str("    *\n");
+    }
+   
 }
